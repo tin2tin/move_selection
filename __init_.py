@@ -50,20 +50,20 @@ class SEQUENCER_OT_move_selection(bpy.types.Operator):
                         # Calculate the distance between the active strip and the current strip based on frames
                         if (
                             self.direction == "LEFT"
-                            and active_strip.frame_final_start > seq.frame_final_end
+                            and active_strip.frame_final_start >= seq.frame_final_end
                         ):
                             distance = (
                                 active_strip.frame_final_start - seq.frame_final_end
                             )
                         elif (
                             self.direction == "RIGHT"
-                            and seq.frame_final_start > active_strip.frame_final_end
+                            and seq.frame_final_start >= active_strip.frame_final_end
                         ):
                             distance = (
                                 seq.frame_final_start - active_strip.frame_final_end
                             )
                         # Update the nearest strip if this strip is closer
-                        if distance and abs(distance) < nearest_distance:
+                        if distance != None and abs(distance) < nearest_distance:
                             nearest_distance = abs(distance)
                             nearest_strip = seq
             if self.direction == "UP":
